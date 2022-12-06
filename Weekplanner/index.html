@@ -20,25 +20,22 @@
   </head>
   <body class="container-fluid">
     <div id="navbar"></div>
-    <div class="row m-1">
+    <div class="row m-0">
       <div class="col-lg-7">
-        <div id="sessions-today"></div>
+        <div id="sessions-today" class="module"></div>
       </div>
       <div class="col-lg">
-        <div id="session-previous"></div>
-        <div id="statistics"></div>
+        <div id="session-previous" class="module"></div>
+        <div id="statistics" class="module"></div>
       </div>
     </div>
     <div id="" class="container-fluid">
-      <div class="row m-1" id="scheduler"></div>
-      <div class="row m-1" id="history"></div>
+      <div class="row m-0 module" id="scheduler"></div>
     </div>
-
-    <script type="module" src="/components/scheduler.js"></script>
-    <script type="module" src="/components/history.js"></script>
-    <script type="module" src="/components/sessions-today.js"></script>
-    <script type="module" src="/components/session-previous.js"></script>
-    <script type="module" src="/components/statistics.js"></script>
+    <div id="" class="container-fluid">
+      <div class="row m-0 module" id="history"></div>
+    </div>
+    
 
     <!-- Bootstrap Deps -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

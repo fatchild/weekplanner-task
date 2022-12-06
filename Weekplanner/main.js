@@ -2,8 +2,18 @@ import './style.css'
 // import javascriptLogo from './javascript.svg'
 // import { setupCounter } from './counter.js'
 
+// components
+import { navbar } from './components/navbar'
+import { history } from './components/history'
+import { scheduler } from './components/scheduler'
+import { sessionPrevious } from './components/session-previous'
+import { sessionToday } from './components/sessions-today'
+import { statistics } from './components/statistics'
+
 import { Sessions } from './src/Sessions'
 const sessions = new Sessions()
+
+var knownTransactionID = sessions.transactionID;
 
 // make sure the DOM is loaded before running application code
 document.addEventListener("DOMContentLoaded", function() {
@@ -32,12 +42,54 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // the main application code
 const app = () => {
-        console.log(sessions.data, "8")
-        sessions.scheduleSession("Unscheduled", 0, "Monday")
-        console.log(sessions.data, "11")
 
-        sessions.unscheduleAll()
-        console.log(sessions.data)
+    // Build components of the page
+    navbar()
+    // history()
+    scheduler(sessions)
+    // sessionPrevious()
+    // sessionToday()
+    // statistics()
+
+    // Maximize icons
+    maximize()
+
+    // long-polling using a transactionID
+    setInterval(() => {
+        if (knownTransactionID !== sessions.transactionID){
+            console.log("1")
+        } else {
+            console.log("2")
+        }
+    }, 500)
+}
+
+const maximize = () => {
+    let moduleBoxes = document.querySelectorAll(".module")
+    let body = document.querySelector("body")
+
+    moduleBoxes.forEach((moduleBox) => {
+        let iconExpand = moduleBox.querySelector(':scope .bi-arrows-angle-expand');
+        let iconClose = moduleBox.querySelector(':scope .bi-arrows-angle-contract');
+
+        if (iconExpand) {
+            iconExpand.addEventListener("click", () => {
+                moduleBox.classList.add("maximize")
+                body.style.overflow = "hidden"
+                iconExpand.classList.add("d-none")
+                iconClose.classList.remove("d-none")
+            })
+        }
+
+        if (iconClose) {
+            iconClose.addEventListener("click", () => {
+                moduleBox.classList.remove("maximize")
+                body.style.overflow = "unset"
+                iconClose.classList.add("d-none")
+                iconExpand.classList.remove("d-none")
+            })
+        }
+    })
 }
 
 

@@ -18,6 +18,16 @@ h1 {
   padding: 1em;
   min-height: 5em;
   border-radius: 1em;
+  transition: 0.5s;
+}
+
+.small-box-module {
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+
+.bg-light-fade {
+  background-color: rgb(255, 255, 255, 0.45);
 }
 
 .bg-pink {
@@ -30,4 +40,28 @@ h1 {
 
 .bg-cyan {
   background-color: #1AB2E3;
+}
+
+#scheduler-module {
+  max-height: 70vh;
+  overflow-x: auto;
+}
+
+.schedule-module-title {
+  width: 10%;
+}
+
+.maximize {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 100%;
+  padding: 1em;
+  height: 100vh;
+  background-color: #3c0715e0;
+  transition: 0.5s;
+}
+
+.module.maximize .box-module {
+  max-height: 85vh !important;
 }

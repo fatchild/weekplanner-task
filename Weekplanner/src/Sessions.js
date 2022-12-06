@@ -12,6 +12,9 @@ export class Sessions{
             totalScheduledSessions: 0,
             totalUnscheduledSessions: 0,
         }
+
+        // setup transaction id for long-polling, websockets too much overhead for this size of project
+        this.transactionID = Date.now()
     }
 
     // 
@@ -25,6 +28,13 @@ export class Sessions{
         this.data = this._db.getData 
 
         console.log("data built")
+    }
+
+    // 
+    // set transaction ID
+    // 
+    _setTransactionID(){
+        this.transactionID = Date.now()
     }
 
     // 
@@ -77,6 +87,11 @@ export class Sessions{
 
         // commit this back for persistance
         this._db.commitData = this.data
+
+        // update the transaction ID
+        this._setTransactionID()
+
+        console.log("test")
     }
 
     // wrapper for the above for schedules only going into unscheduled

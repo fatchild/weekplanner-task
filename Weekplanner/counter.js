@@ -6,4 +6,6 @@ export function setupCounter(element) {
   }
   element.addEventListener('click', () => setCounter(counter + 1))
   setCounter(0)
+
+  sessions.scheduleSession("Unscheduled", 0, "Monday")
 }
