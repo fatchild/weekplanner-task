@@ -196,7 +196,11 @@ ___
 
 [X] - Basic Page
 [X] - Modules and Layout
-[ ] - 
+[X] - Backend classes
+[ ] - Scheduler module functionality
+    [ ] - maximize module
+    [ ] - click where you wish the session to go
+    [ ] - drag and drop later
 
 
 ___
