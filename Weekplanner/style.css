@@ -1,0 +1,33 @@
+body {
+  background-color: #14142B;
+  font-family: 'Anek Devanagari', Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 16px;
+  font-family: 'kanit', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 500;
+}
+
+.navbar p {
+  font-weight: 100;
+}
+
+.box-module {
+  box-shadow: 2px 2px 0px 0px #F0F0F0;
+  padding: 1em;
+  min-height: 5em;
+  border-radius: 1em;
+}
+
+.bg-pink {
+  background-color: #FF5885;
+}
+
+.bg-slate {
+  background-color: #3B3B4B;
+}
+
+.bg-cyan {
+  background-color: #1AB2E3;
+}

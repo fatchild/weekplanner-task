@@ -141,8 +141,6 @@ ___
 
 - transfering to adobe XD to make an image board
 
-![](./NOTES%20-%20Resources/front-end-design/DesignMindMap.png)
-
 
 #### Include in design 
 - Modules  
@@ -191,6 +189,14 @@ ___
 - HTML file: SINGULAR? -> SPA?
 - JS files: package bundler
 - CSS: framework -> Bootstrap / bulmer + customizations
+
+
+
+## Development Notes
+
+[X] - Basic Page
+[X] - Modules and Layout
+[ ] - 
 
 
 ___
