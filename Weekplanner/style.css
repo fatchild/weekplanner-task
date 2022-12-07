@@ -120,3 +120,47 @@ h1 {
   padding: 0.1em 0;
   border-radius: 0.4em;
 }
+
+#settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #a29383c2;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#settings-box {
+  background-color: #2B2B41;
+  border-radius: 1em;
+  transition: 0.2s;
+  box-shadow: 2px 2px 0px 0px #F0F0F0;
+}
+
+.navbar .bi-chevron-double-down {
+  transition: 0.2s;
+}
+.navbar .bi-chevron-double-down:hover {
+  transform: scale(1.2) translate(0, 0.2em);
+  transition: 0.2s;
+}
+
+#settings .bi-x-lg, #settings .bi-toggle-off {
+  transition: 0.2s;
+}
+#settings .bi-x-lg:hover, #settings .bi-toggle-off:hover, #settings .bi-toggle-on:hover {
+  transition: 0.2s;
+  transform: scale(1.5);
+}
+#settings .bi-x-lg:hover {
+  transition: 0.2s;
+  transform: scale(1.5);
+}
+#settings .bi-toggle-off:hover, #settings .bi-toggle-on:hover {
+  transition: 0.2s;
+  transform: scale(1.2);
+}

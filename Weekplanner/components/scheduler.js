@@ -1,5 +1,5 @@
 export const scheduler = (sessions) => { 
-    console.log(sessions.data)
+    // console.log(sessions.data)
 
     let sessionList = ""
 
@@ -25,7 +25,6 @@ export const scheduler = (sessions) => {
                     <div id="Sunday" class="weekday-assignment tiny-module d-flex ms-2"><span class="d-flex pt-2 m-auto">Su</span></div>
                 `
             } else {
-                console.log(key, i)
                 if (sessions.sessionCompletedStatus(key, i)) {
                     sessionCompleted = "session-completed"
                 }
@@ -62,10 +61,10 @@ export const scheduler = (sessions) => {
                     <h1 class="schedule-module-title align-middle my-auto pe-2 text-start ">
                         ${sessionArray[i]["name"]}
                     </h1>
-                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-dark">
+                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-light">
                         ${sessionArray[i]["length"] + "m"}
                     </span>
-                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-dark">
+                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-light">
                         ${sessionArray[i]["description"].substring(0, 50) + "..."}
                     </span>
                     <div class="ms-auto d-flex flex-direction-row">

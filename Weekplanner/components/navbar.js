@@ -3,7 +3,7 @@ export const navbar = () => {
   document.querySelector('#navbar').innerHTML = `
   <nav class="navbar">
     <div class="container-fluid">
-      <a class="navbar-brand d-flex flex-direction-row align-items-center" href="#">
+      <a class="navbar-brand d-flex flex-direction-row align-items-center" href="/">
         <img src="/company-logo.png" alt="" width="30" height="30" class="d-inline-block align-text-bottom">
         <h1 class="ps-3 m-auto text-light">Weekplanner</h1>
       </a>

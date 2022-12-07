@@ -197,15 +197,37 @@ ___
 [X] - Basic Page
 [X] - Modules and Layout
 [X] - Backend classes
-[ ] - Scheduler module functionality
-    [ ] - maximize module
-    [ ] - click where you wish the session to go
+[X] - Scheduler module functionality
+    [X] - maximize module
+    [X] - click where you wish the session to go
     [ ] - drag and drop
-    [ ] - display sessions
-        [ ] - get whole object 
-        [ ] - iterate through function returning html components 
-
+    [X] - display sessions
+        [X] - get whole object 
+        [X] - iterate through function returning html components 
 > That's a lot of yoga 🥵
+[ ] - Settings
+    [ ] - Darkmode
+    [ ] - Switch modules on and off
+    [ ] - Start again / remove all saved data from local storage
+[ ] - Scheduler
+    [ ] - Make it responsive
+[ ] - Develop completed
+    [ ] - A form for input of notes
+    [ ] - Display in the history module
+[ ] - Scheduler
+    [ ] - Click and expand sessions to see details
+[ ] - Today's sessions
+    [ ] - Day picker
+[ ] - Notes
+    [ ] - Last sessions
+    [ ] - Coaches Notes
+[ ] - Stylistic touches to make it more app-like
+    [ ] - No highlighting
+    [ ] - pointer icon
+
+[ ] - Clean up the code
+[ ] - Write tests
+[ ] - Deploy to netlify 
 
 
 ___
