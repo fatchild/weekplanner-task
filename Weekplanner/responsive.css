@@ -1,0 +1,28 @@
+@media only screen and (max-width: 600px) {
+    #session-duration-scheduler {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #session-desc-scheduler {
+        display: none !important;
+    }
+    .schedule-module-title {
+        width: 10%;
+        min-width: 3.2em;
+        font-size: 14px;
+    }
+    .weekday-assignment {
+        margin-left: 0.20rem!important;
+    }
+    .weekday-button-group {
+        overflow: scroll;
+    }
+    #nav-username {
+        display: none;
+    }
+    #app-nav {
+        padding: 1em 1em 0 1em;
+    }
+}

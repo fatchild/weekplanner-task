@@ -61,13 +61,13 @@ export const scheduler = (sessions) => {
                     <h1 class="schedule-module-title align-middle my-auto pe-2 text-start ">
                         ${sessionArray[i]["name"]}
                     </h1>
-                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-light">
+                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-light" id="session-duration-scheduler">
                         ${sessionArray[i]["length"] + "m"}
                     </span>
-                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-light">
+                    <span class="d-flex mb-0 text-center pt-2 px-3 border-start border-light" id="session-desc-scheduler">
                         ${sessionArray[i]["description"].substring(0, 50) + "..."}
                     </span>
-                    <div class="ms-auto d-flex flex-direction-row">
+                    <div class="ms-auto d-flex flex-direction-row weekday-button-group">
                         ${weekdayButtons}
                         ${controlButton}
                     </div>

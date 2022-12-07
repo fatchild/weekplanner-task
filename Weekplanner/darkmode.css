@@ -3,3 +3,23 @@
 body.dark {
     background-color: black;
 }
+
+body.dark .bg-pink {
+    background-color: #242332;
+}
+
+body.dark .tiny-module {
+    background-color: rgb(255 255 255 / 18%);
+}
+
+body.dark .box-module {
+    box-shadow: 2px 2px 12px 0px #f0f0f0;
+}
+
+body.dark #settings-box {
+    box-shadow: 2px 2px 12px 0px #f0f0f0;
+}
+
+body.dark .maximize {
+    background-color: #111114e0;
+}

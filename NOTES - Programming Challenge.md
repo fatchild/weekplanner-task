@@ -206,9 +206,9 @@ ___
         [X] - iterate through function returning html components 
 > That's a lot of yoga 🥵
 [ ] - Settings
-    [ ] - Darkmode
-    [ ] - Switch modules on and off
-    [ ] - Start again / remove all saved data from local storage
+    [X] - Darkmode
+    [X] - Switch modules on and off
+    [X] - Start again / remove all saved data from local storage
 [ ] - Scheduler
     [ ] - Make it responsive
 [ ] - Develop completed

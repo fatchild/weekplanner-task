@@ -1,5 +1,6 @@
 import './style.css'
 import './darkmode.css'
+import './responsive.css'
 // import javascriptLogo from './javascript.svg'
 // import { setupCounter } from './counter.js'
 
@@ -77,6 +78,9 @@ const app = () => {
 
     // create sessions and event handlers
     updatePage()
+
+    // restore data
+    restoreHandler()
 
     // long-polling using a transactionID
     setInterval(() => {
@@ -405,6 +409,17 @@ const openModule = (id) => {
 }
 const closeModule = (id) => {
     localStorage.setItem(id, 'closed');
+}
+
+// 
+// event handler for refresh data button
+// 
+const restoreHandler = () => {
+    let refreshDataElem = document.querySelector("#refresh-data")
+
+    refreshDataElem.addEventListener("click", () => {
+        sessions.unscheduleAll()
+    })
 }
 
 // console.log(sessions.totalSessions)

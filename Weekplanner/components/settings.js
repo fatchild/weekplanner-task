@@ -51,6 +51,11 @@ export const settings = () => {
           </svg>
         </div>
         <div class="align-self-center pt-2"><span class="">SCHEDULER</span></div>-->
+
+      <!-- REMOVE STORED INFO --> 
+      <h1 class="p-0 pt-3 mt-5 text-center w-100 border-top border-white">Restore JSON Data</h1>
+      <div class="d-flex justify-content-center text-white mt-0">
+        <div class="align-self-center pt-2 mt-1 btn btn-danger" id="refresh-data">REFRESH</div>
       </div>
     </div>
   `
