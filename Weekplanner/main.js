@@ -15,6 +15,10 @@ const sessions = new Sessions()
 
 var knownTransactionID = sessions.transactionID;
 
+const refreshRateInterval = 250
+
+let persistentScrollScheduler = 0
+
 // make sure the DOM is loaded before running application code
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -54,16 +58,41 @@ const app = () => {
     // Maximize icons
     maximize()
 
+    // Assignment of sessions to weekdays
+    weekdayAssign()
+
+    // Session controls once assigned
+    adjustSessionPosition()
+
+    // persistent scroll 
+    persistentScrollEvent()
+
+    // Unschedule all button
+    unscheduleAllSessions()
+
     // long-polling using a transactionID
     setInterval(() => {
         if (knownTransactionID !== sessions.transactionID){
-            console.log("1")
+
+            // update the known transaction id so we do not loop forever
+            knownTransactionID = sessions.transactionID
+
+            scheduler(sessions)
+            persistentScroll()
+            persistentScrollEvent()
+            weekdayAssign()
+            maximize()
+            adjustSessionPosition()
+            unscheduleAllSessions()
         } else {
-            console.log("2")
+            console.log("No updates needed")
         }
-    }, 500)
+    }, refreshRateInterval)
 }
 
+// 
+// Maximize and minimize the modules
+// 
 const maximize = () => {
     let moduleBoxes = document.querySelectorAll(".module")
     let body = document.querySelector("body")
@@ -89,6 +118,103 @@ const maximize = () => {
                 iconExpand.classList.remove("d-none")
             })
         }
+    })
+}
+
+// 
+// event listeners for assigning sessions to weekdays
+// 
+const weekdayAssign = () => {
+    let weekdays = document.querySelectorAll(".weekday-assignment")
+
+    weekdays.forEach((weekdayElem) => {
+        let weekdayStr = weekdayElem.getAttribute('id')
+        let parentIdAttribute = weekdayElem.parentNode.parentNode.getAttribute('id').split("-")
+        let parentKey = parentIdAttribute[0]
+        let parentIndex = Number(parentIdAttribute[1])
+
+        weekdayElem.addEventListener("click", () => {
+            if (knownTransactionID === sessions.transactionID){
+                sessions.scheduleSession(parentKey, parentIndex, weekdayStr)
+            }
+        })
+    })
+}
+
+// 
+// event handlers for controlling individual sessions
+// 
+const adjustSessionPosition = () => {
+    let controls = document.querySelectorAll(".weekday-control")
+
+    controls.forEach((controlElem) => {
+
+        let parentIdAttribute = controlElem.parentNode.parentNode.getAttribute('id').split("-")
+        let parentKey = parentIdAttribute[0]
+        let parentIndex = Number(parentIdAttribute[1])
+
+        const arrowControlEvent = (callback) => {
+            controlElem.addEventListener("click", () => {
+                if (knownTransactionID === sessions.transactionID){
+                    callback()
+                }
+            })
+        }
+
+        if (controlElem.classList.contains("weekday-control-up")){
+            arrowControlEvent(() => {
+                sessions.scheduleSession(parentKey, parentIndex, parentKey, parentIndex - 1)
+            })
+        } else if (controlElem.classList.contains("weekday-control-down")){
+            arrowControlEvent(() => {
+                sessions.scheduleSession(parentKey, parentIndex, parentKey, parentIndex + 1)
+            })
+        } else if (controlElem.classList.contains("weekday-control-unassign")){
+            arrowControlEvent(() => {
+                sessions.unscheduleSession(parentKey, parentIndex)
+            })
+        } else if (controlElem.classList.contains("weekday-control-completed")){
+            
+            // get session
+            // test if it is completed
+            // add completed remove if not
+            arrowControlEvent(() => {
+                if (sessions.sessionCompletedStatus(parentKey, parentIndex)){
+                    sessions.sessionCompleted(parentKey, parentIndex, false)
+                    controlElem.classList.remove("session-completed")
+                } else {
+                    sessions.sessionCompleted(parentKey, parentIndex, true)
+                    controlElem.classList.add("session-completed")
+                }
+            })
+        }
+    })
+}
+
+// 
+// remember scroll position so users don't have to scroll each time an update is made to the element
+// 
+const persistentScrollEvent = () => {
+    let moduleScheduler = document.querySelector("#scheduler-module")
+
+    moduleScheduler.addEventListener("scroll", () => {
+        persistentScrollScheduler = moduleScheduler.scrollTop
+    })
+}
+const persistentScroll = () => {
+    let moduleScheduler = document.querySelector("#scheduler-module")
+
+    moduleScheduler.scrollTop = persistentScrollScheduler
+}
+
+// 
+// unschedule all sessions event handler
+// 
+const unscheduleAllSessions = () => {
+    let unscheduleButton = document.querySelector("#unschedule-all")
+
+    unscheduleButton.addEventListener("click", () => {
+        sessions.unscheduleAll()
     })
 }
 

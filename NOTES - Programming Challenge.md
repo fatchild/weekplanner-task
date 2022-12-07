@@ -200,7 +200,12 @@ ___
 [ ] - Scheduler module functionality
     [ ] - maximize module
     [ ] - click where you wish the session to go
-    [ ] - drag and drop later
+    [ ] - drag and drop
+    [ ] - display sessions
+        [ ] - get whole object 
+        [ ] - iterate through function returning html components 
+
+> That's a lot of yoga 🥵
 
 
 ___

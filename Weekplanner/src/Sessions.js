@@ -78,20 +78,30 @@ export class Sessions{
     // 
     // scheduling methods
     // 
-    scheduleSession(fromWhere, fromIndex, toWeekday){
+    scheduleSession(fromWhere, fromIndex, toWeekday, toIndex){
         // get the session
-        let session = this.data[fromWhere].splice(fromIndex, fromIndex+1)[0]
+        let session = this.data[fromWhere].splice(fromIndex, 1)[0]
 
-        // assign it to it's new array
-        this.data[toWeekday].push(session)
+        if (session && session.length > 0) {
+            console.log(toIndex, "TO INDEX")
 
-        // commit this back for persistance
-        this._db.commitData = this.data
+            // assign it to it's new array, if it has an index be specific, push() if not
+            if (typeof toIndex === "number"){
+                console.log(this.data[toWeekday], toWeekday)
+                this.data[toWeekday].splice(toIndex, 0, session)
+            } else {
+                this.data[toWeekday].push(session)
+            }
 
-        // update the transaction ID
-        this._setTransactionID()
+            // commit this back for persistance
+            this._db.commitData = this.data
 
-        console.log("test")
+            // update the transaction ID
+            this._setTransactionID()
+
+            console.log("Session committed")
+        }
+        
     }
 
     // wrapper for the above for schedules only going into unscheduled
@@ -108,13 +118,30 @@ export class Sessions{
             }
         }
         this._db.commitData = this.data
+
+        // update the transaction ID
+        this._setTransactionID()
     }
 
-    sessionCompleted(sessionObj, bool){
-        sessionObj["completed"] = bool
+    sessionCompleted(fromWhere, fromIndex, bool){
+        this.data[fromWhere][fromIndex]["completed"] = bool
+
+        // commit the data back to the JSONdb
+        this._db.commitData = this.data
+
+        // update the transaction ID
+        this._setTransactionID()
     }
 
-    sessionCompletedStatus(sessionObj) {
-        return sessionObj["completed"]
+    sessionCompletedStatus(fromWhere, fromIndex) {
+        if (this.data[fromWhere] && 
+            this.data[fromWhere][fromIndex] && 
+            this.data[fromWhere][fromIndex]["completed"] === true){
+            console.log(true)
+            return true
+        } else {
+            console.log(false)
+            return false
+        }
     }
 }
