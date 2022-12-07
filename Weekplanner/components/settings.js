@@ -40,17 +40,18 @@ export const settings = () => {
         <div class="align-self-center pt-2"><span class="">SCHEDULER</span></div>
       </div>
 
-      <!-- SCHEDULER 
+      <!-- SCHEDULER -->
       <div class="d-flex text-white mt-0">
         <div class="me-5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-toggle-off" id="module-todays-sessions" viewBox="0 0 16 16">
             <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/>
           </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle-on d-none" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-toggle-on d-none" id="module-todays-sessions" viewBox="0 0 16 16">
             <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
           </svg>
         </div>
-        <div class="align-self-center pt-2"><span class="">SCHEDULER</span></div>-->
+        <div class="align-self-center pt-2"><span class="">TODAYS SESSIONS</span></div>
+      </div>
 
       <!-- REMOVE STORED INFO --> 
       <h1 class="p-0 pt-3 mt-5 text-center w-100 border-top border-white">Restore JSON Data</h1>

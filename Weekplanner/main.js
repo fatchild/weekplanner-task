@@ -52,16 +52,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // the main application code
 const app = () => {
+    let distFromBottom = document.height
+
     // fresh settings
     let freshSettings = localSettings.refreshSettings()
 
     // Build components of the page
     navbar()
     settings()
-    // history()
-    // sessionPrevious()
-    // sessionToday()
-    // statistics()
 
     // event Handlers for settings
     settingsMenu()
@@ -74,6 +72,7 @@ const app = () => {
     // module state
     moduleStateOnLoad(freshSettings, {
         'moduleScheduler':"#scheduler",
+        'moduleTodaysSessions':"#sessions-today",
     })
 
     // create sessions and event handlers
@@ -103,12 +102,16 @@ const app = () => {
 // 
 const updatePage = () => {
     scheduler(sessions)
+    sessionToday(sessions)
     persistentScroll()
     persistentScrollEvent()
     weekdayAssign()
     maximize()
     adjustSessionPosition()
     unscheduleAllSessions()
+    // history()
+    // sessionPrevious()
+    // statistics()
 }
 
 
@@ -252,19 +255,19 @@ const settingsMenu = () => {
     // close via background
     settingsPageElem.addEventListener("click", (e) => {
         if(e.target !== e.currentTarget) return;
-        console.log("Close settings box 1")
+        // console.log("Close settings box 1")
         settingsPageElem.classList.add("d-none")
     })
 
     // close via icon
     settingsBoxExitElem.addEventListener("click", () => {
-        console.log("Close settings box")
+        // console.log("Close settings box")
         settingsPageElem.classList.add("d-none")
     })
 
     // open via icon in navbar
     openSettingsIconElem.addEventListener("click", () => {
-        console.log("Open settings box")
+        // console.log("Open settings box")
         settingsPageElem.classList.remove("d-none")
     })
 }
@@ -280,7 +283,7 @@ const toggleSettings = () => {
         // Toggle on
         let toggleOnElem = toggleOffElem.nextElementSibling;
         toggleOffElem.addEventListener("click", () => {
-            console.log("toggle ON")
+            // console.log("toggle ON")
             // remove toggle
             // replace with toggled on
             toggleHide(toggleOnElem, toggleOffElem)
@@ -292,11 +295,16 @@ const toggleSettings = () => {
                 document.querySelector("#scheduler").classList.remove("d-none")
                 openModule("moduleScheduler")
             }
+            else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
+                // console.log("blag")
+                document.querySelector("#sessions-today").classList.remove("d-none")
+                openModule("moduleTodaysSessions")
+            }
         })
 
         // Toggle off
         toggleOnElem.addEventListener("click", () => {
-            console.log("toggle OFF")
+            // console.log("toggle OFF")
             // remove toggle
             // replace with toggled on
             toggleHide(toggleOffElem, toggleOnElem)
@@ -308,6 +316,11 @@ const toggleSettings = () => {
             else if (toggleOnElem.getAttribute("id") === "module-scheduler"){
                 document.querySelector("#scheduler").classList.add("d-none")
                 closeModule("moduleScheduler")
+            }
+            else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
+                // console.log("blag222")
+                document.querySelector("#sessions-today").classList.add("d-none")
+                closeModule("moduleTodaysSessions")
             }
         })
     })
@@ -330,7 +343,7 @@ const toggleSettingsInit = (localSettings) => {
         // darkMode
         let OffElem = document.querySelector(OffElemSel)
         let OnElem = document.querySelector(OnElemSel)
-        console.log(localSet[localStoreId], testVal)
+        // console.log(localSet[localStoreId], testVal, "herere")
         if (localSet[localStoreId] === testVal){
             toggleHide(OnElem, OffElem)
         } else {
@@ -343,6 +356,9 @@ const toggleSettingsInit = (localSettings) => {
 
     // module scheduler
     toggleSettingHelper(localSettings, "#settings #module-scheduler.bi-toggle-off", "#settings #module-scheduler.bi-toggle-on", "moduleScheduler", "open")
+
+    // module scheduler
+    toggleSettingHelper(localSettings, "#settings #module-todays-sessions.bi-toggle-off", "#settings #module-todays-sessions.bi-toggle-on", "moduleTodaysSessions", "open")
 }
 
 // 
@@ -357,22 +373,22 @@ const darkModeOnload = (localSettings) => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light').matches && localSettings.darkMode !== 'dark') {
         // System is light, website is light or no preference = Make light
         makeLight(body);
-        console.log("1")
+        // console.log("1")
     } 
     else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light').matches && localSettings.darkMode === 'dark') {
         // System is light, website is dark = Make dark
         makeDark(body);
-        console.log("2")
+        // console.log("2")
     }
     else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark').matches && localSettings.darkMode === 'dark') {
         // System is dark, website is dark = Make dark
         makeDark(body);
-        console.log("3")
+        // console.log("3")
     }
     else {
         // System must be dark, website must be light or no preference
         makeLight(body);
-        console.log("4")
+        // console.log("4")
     }
     
     // Add an event listener which checks for system preference changes, do exactly what it says
@@ -388,6 +404,7 @@ const darkModeOnload = (localSettings) => {
 // module open or closed onload
 const moduleStateOnLoad = (localSettings, moduleObj) => {
     for (let module in moduleObj) {
+        // console.log(moduleObj[module], "modu")
         if (localSettings[module] && localSettings[module] === "closed"){
             document.querySelector(moduleObj[module]).classList.add("d-none")
         }

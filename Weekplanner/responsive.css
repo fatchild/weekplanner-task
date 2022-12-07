@@ -16,6 +16,9 @@
     .weekday-assignment {
         margin-left: 0.20rem!important;
     }
+    .weekday-assignment span {
+        font-size: 12px;
+    }
     .weekday-button-group {
         overflow: scroll;
     }
@@ -24,5 +27,8 @@
     }
     #app-nav {
         padding: 1em 1em 0 1em;
+    }
+    #scheduler-module {
+        padding: 1em 0.5em;
     }
 }
