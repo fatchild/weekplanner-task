@@ -12,6 +12,7 @@ import { scheduler } from './components/scheduler'
 import { sessionPrevious } from './components/session-previous'
 import { sessionToday } from './components/sessions-today'
 import { statistics } from './components/statistics'
+import { displaySessionDetail } from './components/session-display-detail'
 
 import { Sessions } from './src/Sessions'
 const sessions = new Sessions()
@@ -52,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // the main application code
 const app = () => {
-    let distFromBottom = document.height
+    let distFromBottom = 0
+    console.log('Window height', document.documentElement.scrollHeight);
 
     // fresh settings
     let freshSettings = localSettings.refreshSettings()
@@ -60,6 +62,7 @@ const app = () => {
     // Build components of the page
     navbar()
     settings()
+    displaySessionDetail(sessions)
 
     // event Handlers for settings
     settingsMenu()
@@ -73,6 +76,8 @@ const app = () => {
     moduleStateOnLoad(freshSettings, {
         'moduleScheduler':"#scheduler",
         'moduleTodaysSessions':"#sessions-today",
+        'moduleStatistics':"#statistics",
+        'moduleDetails':"#session-detail",
     })
 
     // create sessions and event handlers
@@ -101,19 +106,44 @@ const app = () => {
 // components and eventHandlers which need regenerating for the page to be fully dynamic
 // 
 const updatePage = () => {
+    sessions.buildStats()
     scheduler(sessions)
     sessionToday(sessions)
     persistentScroll()
     persistentScrollEvent()
     weekdayAssign()
-    maximize()
     adjustSessionPosition()
     unscheduleAllSessions()
     // history()
     // sessionPrevious()
-    // statistics()
+    statistics(sessions)
+    sessionDisplayHandler(sessions)
+    maximize()
 }
 
+// 
+// update the detailed session display
+// 
+
+// 
+// event handler for updating the session display
+// 
+const sessionDisplayHandler = (sessions) => {
+    let allModules = document.querySelectorAll(".single-box-module, .small-box-module")
+
+    allModules.forEach((module) => {
+        module.addEventListener("click", (e) => {
+            console.log(e.currentTarget.classList, "222")
+            if(e.currentTarget.classList.contains("bi") ||
+                e.currentTarget.classList.contains("weekday-control")) return;
+            let id = module.getAttribute("id").split("-")
+            let day = id[0]
+            let index = id[1]
+
+            displaySessionDetail(sessions, day, index)
+        })
+    })
+}
 
 
 // 
@@ -129,10 +159,12 @@ const maximize = () => {
 
         if (iconExpand) {
             iconExpand.addEventListener("click", () => {
+                console.log("1")
                 moduleBox.classList.add("maximize")
                 body.style.overflow = "hidden"
                 iconExpand.classList.add("d-none")
                 iconClose.classList.remove("d-none")
+                window.scrollTo(0,0);
             })
         }
 
@@ -251,24 +283,28 @@ const settingsMenu = () => {
     let openSettingsIconElem = document.querySelector(".navbar .bi-chevron-double-down")
     let settingsPageElem = document.querySelector("#settings")
     let settingsBoxExitElem = document.querySelector("#settings-box .bi-x-lg")
+    let body = document.querySelector("body")
 
     // close via background
     settingsPageElem.addEventListener("click", (e) => {
         if(e.target !== e.currentTarget) return;
         // console.log("Close settings box 1")
         settingsPageElem.classList.add("d-none")
+        body.style.overflow = ""
     })
 
     // close via icon
     settingsBoxExitElem.addEventListener("click", () => {
         // console.log("Close settings box")
         settingsPageElem.classList.add("d-none")
+        body.style.overflow = ""
     })
 
     // open via icon in navbar
     openSettingsIconElem.addEventListener("click", () => {
         // console.log("Open settings box")
         settingsPageElem.classList.remove("d-none")
+        body.style.overflow = "hidden"
     })
 }
 
@@ -292,13 +328,27 @@ const toggleSettings = () => {
                 makeDark(document.querySelector("body"))
             } 
             else if (toggleOnElem.getAttribute("id") === "module-scheduler"){
-                document.querySelector("#scheduler").classList.remove("d-none")
+                document.querySelector("#scheduler").parentNode.classList.remove("d-none")
                 openModule("moduleScheduler")
             }
             else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
                 // console.log("blag")
-                document.querySelector("#sessions-today").classList.remove("d-none")
+                document.querySelector("#sessions-today").parentNode.classList.remove("d-none")
                 openModule("moduleTodaysSessions")
+            }
+            else if (toggleOnElem.getAttribute("id") === "module-statistics"){
+                // console.log("blag")
+                document.querySelector("#statistics").classList.remove("d-none")
+                openModule("moduleStatistics")
+                document.querySelector("#sessions-today").parentNode.classList.remove("col-lg-12")
+                document.querySelector("#sessions-today").parentNode.classList.add("col-lg")
+            }
+            else if (toggleOnElem.getAttribute("id") === "module-details"){
+                // console.log("blag")
+                document.querySelector("#session-detail").classList.remove("d-none")
+                openModule("moduleDetails")
+                document.querySelector("#sessions-today").parentNode.classList.remove("col-lg-12")
+                document.querySelector("#sessions-today").parentNode.classList.add("col-lg")
             }
         })
 
@@ -314,13 +364,29 @@ const toggleSettings = () => {
                 makeLight(document.querySelector("body"))
             } 
             else if (toggleOnElem.getAttribute("id") === "module-scheduler"){
-                document.querySelector("#scheduler").classList.add("d-none")
+                document.querySelector("#scheduler").parentNode.classList.add("d-none")
                 closeModule("moduleScheduler")
             }
             else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
                 // console.log("blag222")
-                document.querySelector("#sessions-today").classList.add("d-none")
+                document.querySelector("#sessions-today").parentNode.classList.add("d-none")
                 closeModule("moduleTodaysSessions")
+            }
+            else if (toggleOnElem.getAttribute("id") === "module-statistics"){
+                // console.log("blag222")
+                document.querySelector("#statistics").classList.add("d-none")
+                closeModule("moduleStatistics")
+                if (document.querySelector("#session-detail").classList.contains("d-none")){
+                    document.querySelector("#sessions-today").parentNode.classList.add("col-lg-12")
+                }
+            }
+            else if (toggleOnElem.getAttribute("id") === "module-details"){
+                // console.log("blag222")
+                document.querySelector("#session-detail").classList.add("d-none")
+                closeModule("moduleDetails")
+                if (document.querySelector("#statistics").classList.contains("d-none")){
+                    document.querySelector("#sessions-today").parentNode.classList.add("col-lg-12")
+                }
             }
         })
     })
@@ -357,8 +423,14 @@ const toggleSettingsInit = (localSettings) => {
     // module scheduler
     toggleSettingHelper(localSettings, "#settings #module-scheduler.bi-toggle-off", "#settings #module-scheduler.bi-toggle-on", "moduleScheduler", "open")
 
-    // module scheduler
+    // module todays sessions
     toggleSettingHelper(localSettings, "#settings #module-todays-sessions.bi-toggle-off", "#settings #module-todays-sessions.bi-toggle-on", "moduleTodaysSessions", "open")
+
+    // module statistics
+    toggleSettingHelper(localSettings, "#settings #module-statistics.bi-toggle-off", "#settings #module-statistics.bi-toggle-on", "moduleStatistics", "open")
+
+    // module session
+    toggleSettingHelper(localSettings, "#settings #module-details.bi-toggle-off", "#settings #module-details.bi-toggle-on", "moduleDetails", "open")
 }
 
 // 
@@ -404,7 +476,6 @@ const darkModeOnload = (localSettings) => {
 // module open or closed onload
 const moduleStateOnLoad = (localSettings, moduleObj) => {
     for (let module in moduleObj) {
-        // console.log(moduleObj[module], "modu")
         if (localSettings[module] && localSettings[module] === "closed"){
             document.querySelector(moduleObj[module]).classList.add("d-none")
         }

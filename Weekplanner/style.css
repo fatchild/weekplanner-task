@@ -14,7 +14,8 @@ h1 {
 }
 
 .box-module {
-  box-shadow: 2px 2px 0px 0px #F0F0F0;
+  /* box-shadow: 2px 2px 0px 0px #F0F0F0; */
+  border: solid white 2px;
   padding: 1em;
   min-height: 5em;
   border-radius: 1em;
@@ -42,8 +43,12 @@ h1 {
   background-color: #1AB2E3;
 }
 
+.bg-blue {
+  background-color: #0A85AD;
+}
+
 #scheduler-module {
-  max-height: 70vh;
+  /* max-height: 70vh; */
   overflow-x: auto;
 }
 
@@ -58,7 +63,7 @@ h1 {
   width: 100%;
   padding: 1em;
   height: 100vh;
-  background-color: #3c0715e0;
+  background-color: #141011db;
   transition: 0.5s;
 }
 
@@ -139,6 +144,7 @@ h1 {
   border-radius: 1em;
   transition: 0.2s;
   box-shadow: 2px 2px 0px 0px #F0F0F0;
+  border: solid 2px white
 }
 
 .navbar .bi-chevron-double-down {
@@ -197,9 +203,9 @@ h1 {
 .three-five-fatigue {height: 60%;}
 .four-five-fatigue {height: 80%;}
 .five-five-fatigue {height: 100%;}
-.active.one-five-fatigue {background-color: #0A85AD;}
+.active.one-five-fatigue {background-color: #0a5e7a;}
 .active.two-five-fatigue {background-color: #1AB2E3;}
-.active.three-five-fatigue {background-color: #6FB7CE;}
+.active.three-five-fatigue {background-color: #20e3a4;}
 .active.four-five-fatigue {background-color: #FAEB42;}
 .active.five-five-fatigue {background-color: #FF5885;}
 
@@ -209,4 +215,29 @@ h1 {
   background-color: #2B2B41;
   border-radius: 1em;
   margin: 0 1em;
+}
+
+.stats-module {
+  background-color: #17637e91;
+  border-radius: 0.5em;
+  padding: 4em 0;
+  height: 100%;
+  /* margin: 0 1em; */
+}
+
+.single-box-module:hover {
+  transform: scale(1.009);
+  transition: 0.2s;
+}
+
+.session-details-module {
+  background-color: #32453b54;
+  border-radius: 0.5em;
+  padding: 2em 0;
+  height: 100%;
+  /* margin: 0 1em; */
+}
+
+.module.maximize .box-module {
+  overflow: auto;
 }

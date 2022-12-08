@@ -2,6 +2,9 @@
     #session-duration-scheduler {
         display: none !important;
     }
+    .session-details-module {
+        min-height: 8em;
+    }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -30,5 +33,10 @@
     }
     #scheduler-module {
         padding: 1em 0.5em;
+    }
+    #settings-box {
+        padding: 1em;
+        height: 90vh;
+        width: 99vw;
     }
 }

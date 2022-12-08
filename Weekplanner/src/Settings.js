@@ -9,6 +9,8 @@ export class settingsLocal {
         this.darkModeSetting()
         this.moduleSchedulerSetting()
         this.moduleTodaysSessionsSetting()
+        this.moduleStatisticsSetting()
+        this.moduleDetailsSetting()
 
         return this.settings
     }
@@ -23,6 +25,14 @@ export class settingsLocal {
 
     moduleTodaysSessionsSetting(){
         this.checkLocalStorageSetting("moduleTodaysSessions", "closed", "open")
+    }
+
+    moduleStatisticsSetting(){
+        this.checkLocalStorageSetting("moduleStatistics", "closed", "open")
+    }
+
+    moduleDetailsSetting(){
+        this.checkLocalStorageSetting("moduleDetails", "closed", "open")
     }
 
     checkLocalStorageSetting(id, expectedValue, defaultValue){
