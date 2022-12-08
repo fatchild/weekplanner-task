@@ -1,11 +1,38 @@
+/* Small Screens */
+
 @media only screen and (max-width: 600px) {
     #session-duration-scheduler {
         display: none !important;
     }
-    .session-details-module {
-        min-height: 8em;
+    #sessions-today #type {
+        display: none;
+    }
+    #sessions-today #target_intensity {
+        display: none;
+    }
+    #sessions-today #target_fatigue {
+        margin-left: auto;
+    }
+    #sessions-today #name, #sessions-today #length {
+        padding-left: 0.5em !important; 
+        padding-right: 0.5em !important; 
+    }
+    #scheduler-module {
+        padding: 0.4em !important;
+    }
+    #scheduler-module .session-type-highlight {
+        padding: 0 0 0 0 !important;
+        margin: 0 0.5em 0 0 !important;
+    }
+    #scheduler-module .weekday-assignment {
+        width: 1.5em !important;
+    }
+    #scheduler-module .weekday-assignment span {
+        padding: 0.3em 0 0 0 !important;
     }
 }
+
+/* Medium Screens */
 
 @media only screen and (max-width: 1000px) {
     #session-desc-scheduler {
@@ -38,5 +65,14 @@
         padding: 1em;
         height: 90vh;
         width: 99vw;
+    }
+    .session-details-module {
+        min-height: 8em;
+    }
+    .fatigue-col {
+        width: 0.5em;
+    }
+    .session h1 {
+        width: fit-content !important;
     }
 }

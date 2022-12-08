@@ -18,8 +18,6 @@ export class JSONdb {
         if (localDataSet) {
             // Local storage set so use this when manipulating and loading data
             this.data = JSON.parse(localStorage.getItem(this.dataStorageId));
-            console.log(this.data, "2")
-            console.log("data built")
         }
     }
 
@@ -29,7 +27,6 @@ export class JSONdb {
     // args is the new data TODO: checking
     // 
     set commitData(data){
-        console.log("Data Committed to local storage")
         // will be stored as a string
         localStorage.setItem(this.dataStorageId, JSON.stringify(data));
     }

@@ -1,9 +1,9 @@
 
 export const settings = () => { 
   document.querySelector('#settings').innerHTML = `
-    <div id="settings-box" class="d-flex flex-column text-white p-5">
+    <div id="settings-box" class="d-flex flex-column text-white p-5 p-3 overflow-auto rounded transition border-neo-brut bg-dark">
       <div class="align-self-end mb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg transition-short scale-up-xlg-hover" viewBox="0 0 16 16">
           <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
         </svg>
       </div>
@@ -16,7 +16,7 @@ export const settings = () => {
       <h1 class="p-0 mt-3 text-start w-100">Visual</h1>
       <div class="d-flex text-white mt-0">
         <div class="me-5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-toggle-off" id="dark-mode" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-toggle-off transition-short scale-up-xlg-hover" id="dark-mode" viewBox="0 0 16 16">
             <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/>
           </svg>
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-toggle-on d-none" id="dark-mode" viewBox="0 0 16 16">

@@ -26,8 +26,6 @@ export class Sessions{
 
         // make sure this object is up to date with that json data
         this.data = this._db.getData 
-
-        console.log("data built")
     }
 
     // 
@@ -79,15 +77,16 @@ export class Sessions{
     // scheduling methods
     // 
     scheduleSession(fromWhere, fromIndex, toWeekday, toIndex){
+        // do not move if putting below index of 0
+        if ( fromIndex == 0 && toIndex <= 0 ){ return }
+
         // get the session
         let session = this.data[fromWhere].splice(fromIndex, 1)[0]
 
         if (session && session.length > 0) {
-            console.log(toIndex, "TO INDEX")
 
             // assign it to it's new array, if it has an index be specific, push() if not
             if (typeof toIndex === "number"){
-                console.log(this.data[toWeekday], toWeekday)
                 this.data[toWeekday].splice(toIndex, 0, session)
             } else {
                 this.data[toWeekday].push(session)
@@ -98,8 +97,6 @@ export class Sessions{
 
             // update the transaction ID
             this._setTransactionID()
-
-            console.log("Session committed")
         }
         
     }
@@ -137,10 +134,8 @@ export class Sessions{
         if (this.data[fromWhere] && 
             this.data[fromWhere][fromIndex] && 
             this.data[fromWhere][fromIndex]["completed"] === true){
-            console.log(true)
             return true
         } else {
-            console.log(false)
             return false
         }
     }

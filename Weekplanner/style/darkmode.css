@@ -1,29 +1,18 @@
-/* Styling for app darkmode */
+/* Styling for app dark mode */
 
-body.dark {
-    background-color: black;
-}
+body.dark { background-color: black; }
 
-body.dark .bg-pink, body.dark .bg-blue, body.dark .bg-cyan {
-    background-color: #2b2b41;
-}
+body.dark .bg-pink, body.dark .bg-blue, body.dark .bg-cyan { background-color: #2b2b41; }
 
-body.dark .tiny-module {
-    background-color: rgb(255 255 255 / 18%);
-}
+body.dark .tiny-module { background-color: rgb(255 255 255 / 18%); }
 
-body.dark #settings-box {
-    box-shadow: 2px 2px 12px 0px #f0f0f0;
-}
+body.dark #settings-box { box-shadow: 2px 2px 12px 0px #f0f0f0; }
 
-body.dark .maximize {
-    background-color: #111114e0;
-}
+body.dark .maximize { background-color: #111114e0; }
 
-body.dark .box-module {
-    color: white;
-}
+body.dark .box-module { color: white; }
 
-body.dark .stats-module {
-    background-color: #333344;
-}
+body.dark .stats-module { background-color: #333344; }
+
+body.dark .border-neo-brut { box-shadow: 5px 8px 1px 1px rgba(255, 255, 255, 0.132) !important; }
+body.dark .border-neo-brut:hover { box-shadow: 1px 2px 1px 1px rgba(255, 255, 255, 0.132) !important; }

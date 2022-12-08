@@ -234,6 +234,38 @@ BUG:
 [ ] - minimize issue: 1. select scheduler 2. schedule a session 3. minimize. The icon is not responsive the first click.
 
 
+TODO: 
+[ ] - Sessions today navigation  
+```html
+<div class="d-flex flex-direction-row justify-content-around p-3 mt-2">
+        <div class="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left text-white d-none" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </div>
+        <div class="text-white pt-2">
+            <span class="">${dayOfWeekName}</span>
+        </div>
+        <div class="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right text-white d-none" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+        </div>
+</div>
+```
+
+```css
+.bi-arrow-right, .bi-arrow-left {
+  transition: 0.2s;
+}
+.bi-arrow-right:hover {
+  transform: translate(0.3em, 0);
+}
+.bi-arrow-left:hover {
+  transform: translate(-0.3em, 0);
+}
+```
+
 ___
 ### Considerations
 

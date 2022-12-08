@@ -110,6 +110,7 @@ const app = () => {
 // components and eventHandlers which need regenerating for the page to be fully dynamic
 // 
 const updatePage = () => {
+
     sessions.buildStats()
     scheduler(sessions)
     sessionToday(sessions)
@@ -120,7 +121,7 @@ const updatePage = () => {
     unscheduleAllSessions()
     statistics(sessions)
     sessionDisplayHandler(sessions)
-    maximize()
+    maximize(localSettings)
 }
 
 // 
@@ -146,34 +147,46 @@ const sessionDisplayHandler = (sessions) => {
 // 
 // Maximize and minimize the modules
 // 
-const maximize = () => {
+const maximize = (settings) => {
     let moduleBoxes = document.querySelectorAll(".module")
     let body = document.querySelector("body")
 
     moduleBoxes.forEach((moduleBox) => {
         let iconExpand = moduleBox.querySelector(':scope .bi-arrows-angle-expand');
         let iconClose = moduleBox.querySelector(':scope .bi-arrows-angle-contract');
+        let moduleId = moduleBox.getAttribute("id")
 
         if (iconExpand) {
             iconExpand.addEventListener("click", () => {
-                moduleBox.classList.add("maximize")
+                moduleBox.classList.add("position-absolute", "top-0", "start-0", "w-100", "p-3", "vh-100", "bg-dark-faded", "transition", "overflow-auto")
                 body.style.overflow = "hidden"
                 iconExpand.classList.add("d-none")
                 iconClose.classList.remove("d-none")
                 window.scrollTo(0,0);
+                settings.maximizePersist(moduleId, true)
             })
         }
 
         if (iconClose) {
             iconClose.addEventListener("click", () => {
-                moduleBox.classList.remove("maximize")
+                moduleBox.classList.remove("position-absolute", "top-0", "start-0", "w-100", "p-3", "vh-100", "bg-dark-faded", "transition", "overflow-auto")
                 body.style.overflow = "unset"
                 iconClose.classList.add("d-none")
                 iconExpand.classList.remove("d-none")
+                settings.maximizePersist(moduleId, false)
             })
+        }
+
+        if (settings.getMaximizeSettings()[moduleId]) {
+            moduleBox.classList.add("position-absolute", "top-0", "start-0", "w-100", "p-3", "vh-100", "bg-dark-faded", "transition", "overflow-auto")
+            body.style.overflow = "hidden"
+            iconExpand.classList.add("d-none", "is-expanded")
+            iconClose.classList.remove("d-none")
+            window.scrollTo(0,0);
         }
     })
 }
+
 
 // 
 // event listeners for assigning sessions to weekdays
@@ -318,10 +331,11 @@ const toggleSettings = () => {
                 makeDark(document.querySelector("body"))
             } 
             else if (toggleOnElem.getAttribute("id") === "module-scheduler"){
-                document.querySelector("#scheduler").parentNode.classList.remove("d-none")
+                document.querySelector("#scheduler").classList.remove("d-none")
                 openModule("moduleScheduler")
             }
             else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
+                document.querySelector("#sessions-today").classList.remove("d-none")
                 document.querySelector("#sessions-today").parentNode.classList.remove("d-none")
                 openModule("moduleTodaysSessions")
             }
@@ -349,10 +363,11 @@ const toggleSettings = () => {
                 makeLight(document.querySelector("body"))
             } 
             else if (toggleOnElem.getAttribute("id") === "module-scheduler"){
-                document.querySelector("#scheduler").parentNode.classList.add("d-none")
+                document.querySelector("#scheduler").classList.add("d-none")
                 closeModule("moduleScheduler")
             }
             else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
+                document.querySelector("#sessions-today").classList.add("d-none")
                 document.querySelector("#sessions-today").parentNode.classList.add("d-none")
                 closeModule("moduleTodaysSessions")
             }
@@ -430,22 +445,18 @@ const darkModeOnload = (localSettings) => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light').matches && localSettings.darkMode !== 'dark') {
         // System is light, website is light or no preference = Make light
         makeLight(body);
-        // console.log("1")
     } 
     else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light').matches && localSettings.darkMode === 'dark') {
         // System is light, website is dark = Make dark
         makeDark(body);
-        // console.log("2")
     }
     else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark').matches && localSettings.darkMode === 'dark') {
         // System is dark, website is dark = Make dark
         makeDark(body);
-        // console.log("3")
     }
     else {
         // System must be dark, website must be light or no preference
         makeLight(body);
-        // console.log("4")
     }
     
     // Add an event listener which checks for system preference changes, do exactly what it says

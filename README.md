@@ -4,11 +4,15 @@ This project requires node & npm.
 1. Clone this repo `https://github.com/fatchild/weekplanner-task`  
 2. cd into Weekplanner `cd Weekplanner`  
 3. Execute `npm run setupLocal`  
->This should install vite, serve the app locally and to your network, ip addresses will be displayed in the terminal
+>This should install vite, serve the app locally, ip addresses will be displayed in the terminal
 
-Running after setup, use
+Running after setup, use this to setup an instance which can be accessed locally
 ```bash
 npm run local
+```
+or, to host
+```bash
+npm run hosted
 ```
 
 ## This has also been deployed to netlify

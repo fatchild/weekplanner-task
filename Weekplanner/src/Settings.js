@@ -2,6 +2,13 @@ export class settingsLocal {
     constructor (){
         // local settings object
         this.settings = {}
+
+        this.settings.maximizePersist = {
+            "scheduler": false,
+            "sessions-today": false,
+            "statistics": false,
+            "session-detail": false
+        }
         
     }
 
@@ -44,5 +51,17 @@ export class settingsLocal {
         } else {
             this.settings[id] = defaultValue
         }
+    }
+
+    // 
+    // Setter & getter for maximization persistance
+    // 
+    maximizePersist(component, bool) {
+        if (!this.settings.maximizePersist.hasOwnProperty(component) && typeof bool !== "boolean"){ return }
+        this.settings.maximizePersist[component] = bool
+    }
+
+    getMaximizeSettings(){
+        return this.settings.maximizePersist
     }
 }
