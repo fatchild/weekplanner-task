@@ -269,8 +269,12 @@ TODO:
 ___
 ### Considerations
 
-[ ] - Accessibility  
-[ ] - Speed  
+[X] - Accessibility  
+    [X] - Wave plugin
+    [X] - Contrast errors
+    [ ] - Lacking Aria tags - this would negatively affect seo
+[X] - Lighthouse Testing
+    [X] - Good performance all round
 [ ] - Testing - Unit tests  
 [ ] - Extra data  
 [ ] - Default values  

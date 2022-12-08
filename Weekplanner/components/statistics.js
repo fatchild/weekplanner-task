@@ -44,19 +44,19 @@ export const statistics = (sessions) => {
             <div class="col-lg-4">
                 <div class="d-flex flex-column text-white stats-module bg-dark-blue rounded-sm py-5 h-100 scale-up-hover">
                     <span class="w-100 h-100 text-center pb-3">Sessions Completed</span>
-                    <h3 class="w-100 h-100 text-center">${sessionsCompleted}</h3>
+                    <h1 class="w-100 h-100 text-center display-5">${sessionsCompleted}</h1>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="d-flex flex-column text-white stats-module bg-dark-blue rounded-sm py-5 h-100 scale-up-hover">
                     <span class="w-100 text-center pb-3">Minutes Trained</span>
-                    <h3 class="w-100 text-center">${minutesCompleted}</h3>
+                    <h1 class="w-100 text-center display-5">${minutesCompleted}</h1>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="d-flex flex-column text-white stats-module bg-dark-blue rounded-sm py-5 h-100 scale-up-hover">
                     <span class="w-100 text-center pb-3">Rest Days</span>
-                    <h3 class="w-100 text-center">${restDays}</h3>
+                    <h1 class="w-100 text-center display-5">${restDays}</h1>
                 </div>
             </div>
         </div>

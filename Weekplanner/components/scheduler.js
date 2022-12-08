@@ -4,7 +4,7 @@ export const scheduler = (sessions) => {
 
     for (let key in sessions.data) {
         // Create the heading
-        sessionList += `<h1 class="text-light">${key}</h1>`
+        sessionList += `<h1 class="text-dark">${key}</h1>`
 
         let weekdayButtons = ""
         let controlButton = ""

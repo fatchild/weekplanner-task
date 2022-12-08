@@ -61,7 +61,7 @@ export const sessionToday = (sessions) => {
     if (sessionArray.length === 0){
         sessionList += `
             <div id="" class="d-flex flex-direction-row justify-content- single-box-module bg-light-fade text-white bg-dark ps-1 pe-3 py-3 rounded-sm mb-2" style="border: 1px solid white; box-shadow: 0px 0px 8px -4px white;">
-                <span class="pt-2">Rest day</span>
+                <span class="pt-2 ps-3">Rest day</span>
             </div>
         `
     }

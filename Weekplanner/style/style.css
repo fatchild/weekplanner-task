@@ -17,10 +17,11 @@ h1 {
 
 .bg-pink { background-color: #FF5885; }
 .bg-slate { background-color: #3B3B4B; }
-.bg-cyan { background-color: #1AB2E3; }
+.bg-cyan { background-color: #1884a8; }
 .bg-blue { background-color: #0a7ba1; }
 .bg-dark-blue { background-color: #17637e91; }
 .bg-dark { background-color: #2B2B41 !important; }
+.bg-black { background-color: #000000 !important; }
 .bg-success { background-color: rgb(36, 232, 18, 0.73) !important; }
 .bg-faded { background-color: rgb(255, 255, 255, 0.65); }
 .bg-more-faded { background-color: rgba(255, 255, 255, 0.283); }
@@ -31,6 +32,7 @@ h1 {
 .bg-hover-action:hover { background-color: #e2ff2457; }
 
 .text-blue { color: #505086; }
+.text-black { color: #000000 !important; }
 
 .w-10 { width: 10% !important }
 .w-90 { width: 90% !important }

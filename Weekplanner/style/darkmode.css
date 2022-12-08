@@ -16,3 +16,5 @@ body.dark .stats-module { background-color: #333344; }
 
 body.dark .border-neo-brut { box-shadow: 5px 8px 1px 1px rgba(255, 255, 255, 0.132) !important; }
 body.dark .border-neo-brut:hover { box-shadow: 1px 2px 1px 1px rgba(255, 255, 255, 0.132) !important; }
+
+body.dark .text-dark { color: white !important; }

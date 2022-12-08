@@ -1,7 +1,7 @@
 export const displaySessionDetail = (sessions, day, index) => { 
 
     let sessionInfo = `
-        <span>Click on any session in the scheduler or in today's session list.</span>
+        <span class="text-black">Click on any session in the scheduler or in today's session list.</span>
     `
 
     if (sessions.data && day && index) {
