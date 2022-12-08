@@ -1,30 +1,36 @@
-import './style.css'
-import './darkmode.css'
-import './responsive.css'
-// import javascriptLogo from './javascript.svg'
-// import { setupCounter } from './counter.js'
+// style
+import './style/style.css'
+import './style/darkmode.css'
+import './style/responsive.css'
+
 
 // components
 import { navbar } from './components/navbar'
 import { settings } from './components/settings'
-import { history } from './components/history'
 import { scheduler } from './components/scheduler'
-import { sessionPrevious } from './components/session-previous'
 import { sessionToday } from './components/sessions-today'
 import { statistics } from './components/statistics'
 import { displaySessionDetail } from './components/session-display-detail'
 
+
+// sessions Class
 import { Sessions } from './src/Sessions'
 const sessions = new Sessions()
 
+
+// local sessions class
 import { settingsLocal } from './src/Settings'
 const localSettings = new settingsLocal()
 
-var knownTransactionID = sessions.transactionID;
 
+// instantiate a known transaction ID for long-polling and set interval time
+var knownTransactionID = sessions.transactionID;
 const refreshRateInterval = 250
 
+
+// track scroll position
 let persistentScrollScheduler = 0
+
 
 // make sure the DOM is loaded before running application code
 document.addEventListener("DOMContentLoaded", function() {
@@ -32,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // load the local JSON id there is no local session data
     if (!sessions.data) {
         async function loadJSON() {
+
             // await for the json to load using fetch
             const response = await fetch("./data.json");
             const json = await response.json();
@@ -44,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         loadJSON()
     } else {
+        // If the JSON has been loaded before then sessions.data will have been constructed
         app()
     }
 
@@ -51,15 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// the main application code
+// the application code
 const app = () => {
-    let distFromBottom = 0
-    console.log('Window height', document.documentElement.scrollHeight);
-
-    // fresh settings
+    // load in refreshed settings
     let freshSettings = localSettings.refreshSettings()
 
-    // Build components of the page
+    // Build components of the page which do not require reloading
     navbar()
     settings()
     displaySessionDetail(sessions)
@@ -72,7 +77,7 @@ const app = () => {
     // dark mode
     darkModeOnload(freshSettings)
 
-    // module state
+    // module state when the app is loaded i.e. persist user settings
     moduleStateOnLoad(freshSettings, {
         'moduleScheduler':"#scheduler",
         'moduleTodaysSessions':"#sessions-today",
@@ -80,7 +85,7 @@ const app = () => {
         'moduleDetails':"#session-detail",
     })
 
-    // create sessions and event handlers
+    // create sessions and event handlers on startup before the db has been touched
     updatePage()
 
     // restore data
@@ -96,11 +101,10 @@ const app = () => {
             // Keep the page updated and the event handlers fresh
             updatePage()
 
-        } else {
-            console.log("No updates needed")
         }
     }, refreshRateInterval)
 }
+
 
 // 
 // components and eventHandlers which need regenerating for the page to be fully dynamic
@@ -114,16 +118,10 @@ const updatePage = () => {
     weekdayAssign()
     adjustSessionPosition()
     unscheduleAllSessions()
-    // history()
-    // sessionPrevious()
     statistics(sessions)
     sessionDisplayHandler(sessions)
     maximize()
 }
-
-// 
-// update the detailed session display
-// 
 
 // 
 // event handler for updating the session display
@@ -133,7 +131,6 @@ const sessionDisplayHandler = (sessions) => {
 
     allModules.forEach((module) => {
         module.addEventListener("click", (e) => {
-            console.log(e.currentTarget.classList, "222")
             if(e.currentTarget.classList.contains("bi") ||
                 e.currentTarget.classList.contains("weekday-control")) return;
             let id = module.getAttribute("id").split("-")
@@ -159,7 +156,6 @@ const maximize = () => {
 
         if (iconExpand) {
             iconExpand.addEventListener("click", () => {
-                console.log("1")
                 moduleBox.classList.add("maximize")
                 body.style.overflow = "hidden"
                 iconExpand.classList.add("d-none")
@@ -233,9 +229,7 @@ const adjustSessionPosition = () => {
             })
         } else if (controlElem.classList.contains("weekday-control-completed")){
             
-            // get session
-            // test if it is completed
-            // add completed remove if not
+            // get session, test if it is completed, add completed remove if not
             arrowControlEvent(() => {
                 if (sessions.sessionCompletedStatus(parentKey, parentIndex)){
                     sessions.sessionCompleted(parentKey, parentIndex, false)
@@ -288,21 +282,18 @@ const settingsMenu = () => {
     // close via background
     settingsPageElem.addEventListener("click", (e) => {
         if(e.target !== e.currentTarget) return;
-        // console.log("Close settings box 1")
         settingsPageElem.classList.add("d-none")
         body.style.overflow = ""
     })
 
     // close via icon
     settingsBoxExitElem.addEventListener("click", () => {
-        // console.log("Close settings box")
         settingsPageElem.classList.add("d-none")
         body.style.overflow = ""
     })
 
     // open via icon in navbar
     openSettingsIconElem.addEventListener("click", () => {
-        // console.log("Open settings box")
         settingsPageElem.classList.remove("d-none")
         body.style.overflow = "hidden"
     })
@@ -310,6 +301,7 @@ const settingsMenu = () => {
 
 // 
 // event handler for toggling he settings
+// TODO: This is a mess, cleanup and decouple
 // 
 const toggleSettings = () => {
     let settingsToggleIconElems = document.querySelectorAll("#settings .bi-toggle-off")
@@ -319,9 +311,7 @@ const toggleSettings = () => {
         // Toggle on
         let toggleOnElem = toggleOffElem.nextElementSibling;
         toggleOffElem.addEventListener("click", () => {
-            // console.log("toggle ON")
-            // remove toggle
-            // replace with toggled on
+            // remove toggle, replace with toggled on
             toggleHide(toggleOnElem, toggleOffElem)
 
             if (toggleOnElem.getAttribute("id") === "dark-mode"){
@@ -332,19 +322,16 @@ const toggleSettings = () => {
                 openModule("moduleScheduler")
             }
             else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
-                // console.log("blag")
                 document.querySelector("#sessions-today").parentNode.classList.remove("d-none")
                 openModule("moduleTodaysSessions")
             }
             else if (toggleOnElem.getAttribute("id") === "module-statistics"){
-                // console.log("blag")
                 document.querySelector("#statistics").classList.remove("d-none")
                 openModule("moduleStatistics")
                 document.querySelector("#sessions-today").parentNode.classList.remove("col-lg-12")
                 document.querySelector("#sessions-today").parentNode.classList.add("col-lg")
             }
             else if (toggleOnElem.getAttribute("id") === "module-details"){
-                // console.log("blag")
                 document.querySelector("#session-detail").classList.remove("d-none")
                 openModule("moduleDetails")
                 document.querySelector("#sessions-today").parentNode.classList.remove("col-lg-12")
@@ -354,9 +341,7 @@ const toggleSettings = () => {
 
         // Toggle off
         toggleOnElem.addEventListener("click", () => {
-            // console.log("toggle OFF")
-            // remove toggle
-            // replace with toggled on
+            // remove toggle, replace with toggled on
             toggleHide(toggleOffElem, toggleOnElem)
 
             // do related settings changes
@@ -368,12 +353,10 @@ const toggleSettings = () => {
                 closeModule("moduleScheduler")
             }
             else if (toggleOnElem.getAttribute("id") === "module-todays-sessions"){
-                // console.log("blag222")
                 document.querySelector("#sessions-today").parentNode.classList.add("d-none")
                 closeModule("moduleTodaysSessions")
             }
             else if (toggleOnElem.getAttribute("id") === "module-statistics"){
-                // console.log("blag222")
                 document.querySelector("#statistics").classList.add("d-none")
                 closeModule("moduleStatistics")
                 if (document.querySelector("#session-detail").classList.contains("d-none")){
@@ -381,7 +364,6 @@ const toggleSettings = () => {
                 }
             }
             else if (toggleOnElem.getAttribute("id") === "module-details"){
-                // console.log("blag222")
                 document.querySelector("#session-detail").classList.add("d-none")
                 closeModule("moduleDetails")
                 if (document.querySelector("#statistics").classList.contains("d-none")){
@@ -391,6 +373,8 @@ const toggleSettings = () => {
         })
     })
 }
+
+
 // 
 // toggle helper
 // 
@@ -398,6 +382,7 @@ const toggleHide = (elemShow, elemHide) => {
     elemShow.classList.remove("d-none")
     elemHide.classList.add("d-none")
 }
+
 
 // 
 // setup the menu based on the settings we know from localStorage
@@ -409,7 +394,6 @@ const toggleSettingsInit = (localSettings) => {
         // darkMode
         let OffElem = document.querySelector(OffElemSel)
         let OnElem = document.querySelector(OnElemSel)
-        // console.log(localSet[localStoreId], testVal, "herere")
         if (localSet[localStoreId] === testVal){
             toggleHide(OnElem, OffElem)
         } else {
@@ -432,6 +416,7 @@ const toggleSettingsInit = (localSettings) => {
     // module session
     toggleSettingHelper(localSettings, "#settings #module-details.bi-toggle-off", "#settings #module-details.bi-toggle-on", "moduleDetails", "open")
 }
+
 
 // 
 // darkmode helpers
@@ -473,7 +458,10 @@ const darkModeOnload = (localSettings) => {
     });
 }
 
+
+// 
 // module open or closed onload
+// 
 const moduleStateOnLoad = (localSettings, moduleObj) => {
     for (let module in moduleObj) {
         if (localSettings[module] && localSettings[module] === "closed"){
@@ -482,7 +470,10 @@ const moduleStateOnLoad = (localSettings, moduleObj) => {
     }
 }
 
+
+// 
 // Helper Functions
+// 
 const makeDark = (body) => {
     body.classList.add("dark");
     localStorage.setItem('darkMode', 'dark');
@@ -499,6 +490,7 @@ const closeModule = (id) => {
     localStorage.setItem(id, 'closed');
 }
 
+
 // 
 // event handler for refresh data button
 // 
@@ -509,55 +501,3 @@ const restoreHandler = () => {
         sessions.unscheduleAll()
     })
 }
-
-// console.log(sessions.totalSessions)
-// console.log(sessions.totalScheduledSessions)
-// console.log(sessions.totalUnscheduledSessions)
-// sessions.buildStats()
-// console.log(sessions.totalSessions)
-// console.log(sessions.totalScheduledSessions)
-// console.log(sessions.totalUnscheduledSessions)
-
-// console.log(sessions.sessionsOnDay("Monday"))
-// console.log(sessions.sessionsOnDay("Tuesday"))
-// console.log(sessions.sessionsOnDay("Wednesday"))
-// console.log(sessions.sessionsOnDay("Thursday"))
-// console.log(sessions.sessionsOnDay("Friday"))
-// console.log(sessions.sessionsOnDay("Saturday"))
-// console.log(sessions.sessionsOnDay("Sunday"), "5")
-
-
-// console.log(sessions.sessionsToday(), "7");
-// console.log(sessions.data, "8")
-// sessions.scheduleSession("Unscheduled", 0, "Monday")
-// console.log(sessions.sessionsOnDay("Monday"))
-// console.log(sessions.data)
-// sessions.unscheduleAll()
-// console.log(sessions.data)
-
-
-
-
-// document.querySelector('#app').innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="/vite.svg" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//     </a>
-//     <h1>Hello Vite!</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite logo to learn more
-//     </p>
-//   </div>
-// `
-
-// setupCounter(document.querySelector('#counter'))
-
-
-
-

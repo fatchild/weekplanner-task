@@ -1,3 +1,17 @@
+# SETUP INSTRUCTIONS  
+This project requires node & npm.  
+
+1. Clone this repo `https://github.com/fatchild/weekplanner-task`  
+2. cd into Weekplanner `cd Weekplanner`  
+3. Execute `npm run setupLocal`  
+>This should install vite and serve the app locally and to your network, ip addresses will be displayed in the terminal
+
+Running after setup, use
+```bash
+npm run local
+```
+
+
 # Weekplanner
 
 This is a short programming task designed to let you demonstrate your skills in frontend web development. You should aim to spend around 2 hours on this task.

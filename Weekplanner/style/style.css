@@ -1,6 +1,7 @@
 body {
   background-color: #14142B;
   font-family: 'Anek Devanagari', Arial, Helvetica, sans-serif;
+  user-select: none;
 }
 
 h1 {
