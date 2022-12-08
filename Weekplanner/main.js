@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!sessions.data) {
         async function loadJSON() {
             // await for the json to load using fetch
-            const response = await fetch("./src/data.json");
+            const response = await fetch("./public/data.json");
             const json = await response.json();
             
             // if we do not have local data, then initialize using this data
