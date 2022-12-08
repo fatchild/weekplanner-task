@@ -15,7 +15,6 @@ h1 {
 }
 
 .box-module {
-  /* box-shadow: 2px 2px 0px 0px #F0F0F0; */
   border: solid white 2px;
   padding: 1em;
   min-height: 5em;

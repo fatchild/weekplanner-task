@@ -209,25 +209,29 @@ ___
     [X] - Darkmode
     [X] - Switch modules on and off
     [X] - Start again / remove all saved data from local storage
-[ ] - Scheduler
-    [ ] - Make it responsive
-[ ] - Develop completed
+[X] - Scheduler
+    [X] - Make it responsive
+[X] - Develop completed sessions
     [ ] - A form for input of notes
     [ ] - Display in the history module
-[ ] - Scheduler
-    [ ] - Click and expand sessions to see details
+[X] - Scheduler
+    [X] - Click and expand sessions to see details
 [ ] - Today's sessions
     [ ] - Day picker
 [ ] - Notes
     [ ] - Last sessions
     [ ] - Coaches Notes
 [ ] - Stylistic touches to make it more app-like
-    [ ] - No highlighting
+    [X] - No highlighting
     [ ] - pointer icon
 
-[ ] - Clean up the code
+[X] - Clean up the code
 [ ] - Write tests
-[ ] - Deploy to netlify 
+[X] - Deploy to netlify 
+
+
+BUG:
+[ ] - minimize issue: 1. select scheduler 2. schedule a session 3. minimize. The icon is not responsive the first click.
 
 
 ___
