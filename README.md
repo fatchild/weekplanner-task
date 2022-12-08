@@ -15,6 +15,7 @@ npm run local
 
 You can find the latest commited version of the app running at...  
 `https://astounding-dragon-765808.netlify.app/`  
+LINK: [Netlify Deployment](https://astounding-dragon-765808.netlify.app/)
 
 
 # Weekplanner
