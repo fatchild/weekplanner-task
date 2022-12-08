@@ -2,15 +2,21 @@
 import './style/style.css'
 import './style/darkmode.css'
 import './style/responsive.css'
+import './style/loading.css'
 
 
 // components
 import { navbar } from './components/navbar'
+import { loading } from './components/loading'
 import { settings } from './components/settings'
 import { scheduler } from './components/scheduler'
 import { sessionToday } from './components/sessions-today'
 import { statistics } from './components/statistics'
 import { displaySessionDetail } from './components/session-display-detail'
+
+
+// whilst the page is loading...
+loading()
 
 
 // sessions Class
@@ -34,6 +40,7 @@ let persistentScrollScheduler = 0
 
 // make sure the DOM is loaded before running application code
 document.addEventListener("DOMContentLoaded", function() {
+    
 
     // load the local JSON id there is no local session data
     if (!sessions.data) {

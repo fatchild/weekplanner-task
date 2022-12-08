@@ -4,6 +4,7 @@ body {
   background-color: #14142B;
   font-family: 'Anek Devanagari', Arial, Helvetica, sans-serif;
   user-select: none;
+  /* background-image: url("/bg-1.png"), url("/bg-2.png"), url("/bg-3.png"); */
 }
 
 h1 {
@@ -95,18 +96,27 @@ h1 {
 .active.four-five-fatigue {background-color: #FAEB42;}
 .active.five-five-fatigue {background-color: #FF5885;}
 
+.module.maximize .box-module { overflow: auto; }
 
 
+/* background image animation */
+
+#Path_14-2, #Path_15-2, #Path_16-2 {
+  stroke-dasharray: 100%;
+  stroke-dashoffset: 100%;
+}
+#Path_14-2 { animation: draw 15s linear alternate infinite; }
+#Path_15-2 { animation: draw 30s linear alternate infinite; }
+#Path_16-2 { animation: draw 60s linear alternate infinite; }
 
 
-/* .session-details-module {
-  background-color: #32453b54;
-  border-radius: 0.5em;
-  padding: 2em 0;
-  height: 100%;
+@keyframes draw {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 100%; }
+}
 
-} */
-
-.module.maximize .box-module {
-  overflow: auto;
+#bg-img-1 {
+  position: fixed;
+  z-index: -1;
+  opacity: 0.5;
 }
