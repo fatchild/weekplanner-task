@@ -101,7 +101,7 @@ h1 {
 
 /* background image animation */
 
-#Path_14-2, #Path_15-2, #Path_16-2 {
+/* #Path_14-2, #Path_15-2, #Path_16-2 {
   stroke-dasharray: 100%;
   stroke-dashoffset: 100%;
 }
@@ -113,7 +113,7 @@ h1 {
 @keyframes draw {
   from { stroke-dashoffset: 0; }
   to { stroke-dashoffset: 100%; }
-}
+} */
 
 #bg-img-1 {
   position: fixed;
