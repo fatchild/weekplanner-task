@@ -1,0 +1,12 @@
+export const loading = () => {
+    // loading screen
+    window.addEventListener("load", () => {
+        const loader = document.querySelector(".loader")
+
+        loader.classList.add("loader-hidden")
+
+        loader.addEventListener("transitionend", () => {
+            loader.remove()
+        })
+    })
+}

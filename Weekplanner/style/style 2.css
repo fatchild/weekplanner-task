@@ -1,0 +1,122 @@
+/* Tag Style */
+
+body {
+  background-color: #14142B;
+  font-family: 'Anek Devanagari', Arial, Helvetica, sans-serif;
+  user-select: none;
+  /* background-image: url("/bg-1.png"), url("/bg-2.png"), url("/bg-3.png"); */
+}
+
+h1 {
+  font-size: 16px;
+  font-family: 'kanit', Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 500;
+}
+
+
+/* Bootstrap Specializations & Extensions  */
+
+.bg-pink { background-color: #FF5885; }
+.bg-slate { background-color: #3B3B4B; }
+.bg-cyan { background-color: #1884a8; }
+.bg-blue { background-color: #0a7ba1; }
+.bg-dark-blue { background-color: #17637e91; }
+.bg-dark { background-color: #2B2B41 !important; }
+.bg-black { background-color: #000000 !important; }
+.bg-success { background-color: rgb(36, 232, 18, 0.73) !important; }
+.bg-faded { background-color: rgb(255, 255, 255, 0.65); }
+.bg-more-faded { background-color: rgba(255, 255, 255, 0.283); }
+.bg-light-faded { background-color: rgb(255, 255, 255, 0.45); }
+.bg-dark-faded { background-color: #141011db; }
+.bg-purple-faded { background-color: #8a83a2c2; }
+.bg-green-faded { background-color: #32453b54; }
+.bg-hover-action:hover { background-color: #e2ff2457; }
+
+.text-blue { color: #505086; }
+.text-black { color: #000000 !important; }
+
+.w-10 { width: 10% !important }
+.w-90 { width: 90% !important }
+
+.rounded { border-radius: 0.9em !important; }
+.rounded-sm { border-radius: 0.5em !important; }
+.rounded-xsm { border-radius: 0.25em !important; }
+
+/* Custom Utilities */
+
+.transition { transition: 0.5s; }
+.transition:hover { transition: 0.5s; }
+
+.transition-short { transition: 0.25s; }
+.transition-short:hover { transition: 0.25s; }
+
+.scale-up-hover:hover { transform: scale(1.009); transition: 0.2s; }
+.scale-up-lg-hover:hover { transform: scale(1.2); }
+.scale-up-xlg-hover:hover { transform: scale(1.5); }
+
+.border-neo-brut { box-shadow: 5px 8px 1px 1px white; }
+.border-neo-brut:hover { box-shadow: 1px 2px 1px 1px white; }
+
+.scale-up-spin:hover { transform: scale(1.8) rotate(180deg); }
+.scale-down-spin:hover { transform: scale(0.8) rotate(180deg); }
+
+.nudge-down:hover { transform: translate(0, 0.2em) }
+
+.w-2-em { width: 2em !important; }
+.w-5-em { width: 5em !important; }
+.w-1-em { width: 1em !important; }
+.h-1-em { height: 1em !important; }
+
+.tiny-module-completed:hover { background-color: rgba(42, 232, 77, 0.517) !important; }
+
+.session-type-highlight {
+  margin: 0 1em 0 0.5em;
+  padding: 0.1em 0;
+  border-radius: 0.4em;
+}
+
+.z-1000 { z-index: 1000; }
+
+/* Fatigue columns styling */
+
+.fatigue-col {
+  width: 0.3em;
+  margin: 0 0 0 4px;
+  background-color: #1ab1e374;
+  border-radius: 1em;
+}
+.one-five-fatigue {height: 20%;}
+.two-five-fatigue {height: 40%;}
+.three-five-fatigue {height: 60%;}
+.four-five-fatigue {height: 80%;}
+.five-five-fatigue {height: 100%;}
+.active.one-five-fatigue {background-color: #0a5e7a;}
+.active.two-five-fatigue {background-color: #1AB2E3;}
+.active.three-five-fatigue {background-color: #20e3a4;}
+.active.four-five-fatigue {background-color: #FAEB42;}
+.active.five-five-fatigue {background-color: #FF5885;}
+
+.module.maximize .box-module { overflow: auto; }
+
+
+/* background image animation */
+
+/* #Path_14-2, #Path_15-2, #Path_16-2 {
+  stroke-dasharray: 100%;
+  stroke-dashoffset: 100%;
+}
+#Path_14-2 { animation: draw 15s linear alternate infinite; }
+#Path_15-2 { animation: draw 30s linear alternate infinite; }
+#Path_16-2 { animation: draw 60s linear alternate infinite; }
+
+
+@keyframes draw {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 100%; }
+} */
+
+#bg-img-1 {
+  position: fixed;
+  z-index: -1;
+  opacity: 0.5;
+}
